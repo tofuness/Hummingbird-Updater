@@ -1,0 +1,134 @@
+<!DOCTYPE hmtl>
+<html lang="en">
+<head>
+<script type="text/javascript" src="js/AIRAliases.min.js"></script>
+<script type="text/javascript" src="js/lib.min.js"></script>
+<script type="text/javascript">
+		$(function(){
+			var msg = $('#message-bg');
+			msg.click(function(){
+				if($(this).hasClass('scrobble')){
+					$('#message-title').html('Updated your list!');
+					$('#message-icon').css('background-image', 'url(img/nicons/check.jpg)');
+				}
+			});
+		});
+</script>
+<style type="text/css">
+	.ns {
+		-webkit-user-select:none;
+	}
+	.ts {
+		-webkit-transition: 0.7s ease all;
+	}
+	@font-face {
+		font-family: 'open_sansbold';
+		src: url('font/OpenSans-Bold-webfont.woff') format('woff'),
+			url('font/OpenSans-Bold-webfont.ttf') format('truetype');
+		font-weight: normal;
+		font-style: normal;
+	}
+	@font-face {
+		font-family: 'open_sanssemibold';
+		src: url('font/OpenSans-Semibold-webfont.woff') format('woff'),
+			url('font/OpenSans-Semibold-webfont.ttf') format('truetype');
+		font-weight: normal;
+		font-style: normal;
+	}
+	.openbold {
+		font-family: 'open_sansbold', sans-serif;
+	}
+	.opensemi {
+		font-family: 'open_sanssemibold', sans-serif;
+	}
+	.cf:before, .cf:after {
+		content: " ";
+		display: table;
+	}
+	.cf:after {
+		clear: both;
+	}
+	body {
+		font-family: arial, sans-serif;
+	}
+	#message-bg {
+		cursor: pointer;
+		opacity: 0;
+		position: absolute;
+		right: 3px;
+		bottom: -80px;
+		width: 300px;
+		background: rgba(41,44,50,0.9) url(img/note-gloss.png) repeat-x;
+		border: 1px solid #1a1c1f;
+		-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 0 3px rgba(0,0,0,0.6);
+		border-radius: 4px;
+	}
+	#message-bg.visible {
+		opacity: 1;
+		bottom: 3px;
+	}
+	#message-wrap {
+		padding: 5px;
+	}
+	#message-icon {
+		float: left;
+		margin-right: 10px;
+		width: 50px;
+		height: 50px;
+		-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
+		border-radius: 4px;
+	}
+	#message {
+		float: left;
+		width: 195px;
+		color: #fff;
+		text-shadow: 0 0 2px rgba(0,0,0,0.3);
+	}
+	#message-title {
+		margin-top: -1px;
+		font-size: 14px;
+	}
+	#message-desc {
+		color: #cfcfcf;
+		font-size: 11px;
+		line-height: 1.5em;
+		text-shadow: 0 1px 3px rgba(0,0,0,0.15);
+	}
+	#message-desc span {
+		color: #fff;
+	}
+	#message-close {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		width: 16px;
+		height: 16px;
+		color: #fff;
+		font-size: 14px;
+		line-height: 16px;
+		text-align: center;
+		background: rgba(0,0,0,0.6);
+		-webkit-border-radius: 20px;
+		-webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.15);
+	}
+	#message-close:hover {
+		opacity: 0.6;
+		-webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.15), 0 0 6px rgba(137,144,158,0.3);
+	}
+</style>
+<body>
+	<div id="message-bg" class="ts ns">
+		<div id="message-close">
+			&times;
+		</div>
+		<div id="message-wrap" class="cf">
+			<div id="message-icon" style="background-image: url(img/nicons/update.jpg)">
+			</div>
+			<div id="message">
+				<div id="message-title" class="openbold">Scrobbling!</div>
+				<div id="message-desc"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

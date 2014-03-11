@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script type="text/javascript" src="js/AIRAliases.min.js" ></script>
+	<script type="text/javascript" src="js/lib.min.js" ></script>
+	<script type="text/javascript" src="js/app.js" ></script>
+	<link rel="stylesheet" type="text/css" href="default.min.css" />
+</head>
+<body>
+	<div id="app-wrap">
+		<div id="top" class="cf ns">
+			<div id="top-logo"></div>
+			<div id="loading" class="openbold ts2"></div>
+			<div id="top-user" class="openbold">
+			</div>
+			<div id="top-controls" class="cf">
+				<div id="top-minimize"></div>
+				<div id="top-close"></div>
+			</div>
+		</div>
+		<div id="middle" class="cf ns">
+			<div id="middle-menu">
+
+			</div>
+			<div id="activity-list">
+			</div>
+		</div>
+		<div id="bottom" class="cf ns ts2">
+			<!--
+			<div id="bottom-misc">
+				An eye for an eye
+			</div>-->
+			<div id="bottom-menu">
+				<a id="open-herro" class="bottom-menu-item" href="http://herro.co/mylist" target="_blank">
+					View List
+				</a>
+				<div id="open-settings" class="bottom-menu-item" >
+					Settings
+				</div>
+				<!--
+				<div id="open-tour" class="bottom-menu-item" >
+					Show Tour
+				</div>-->
+			</div>
+			<!--
+			<a id="clear-history">
+				CLear
+			</a>-->
+		</div>
+		<div id="tour-wrap" class="ns ts2">
+			<div id="tour-slide-wrap" class="cf ts2">
+				<div id="tour-slide-0" class="tour-slide">
+					<div id="tour-take" class="openbold">
+						Take a tour
+					</div>
+					<div id="tour-skip">
+						or simply <a id="tour-text-skip">skip it</a>
+					</div>
+				</div>
+				<div id="tour-slide-1" class="tour-slide">
+				</div>
+				<div id="tour-slide-2" class="tour-slide">
+				</div>
+				<div id="tour-slide-3" class="tour-slide">
+				</div>
+			</div>
+			<div class="tour-control-wrap cf">
+				<div class="tour-control-left"></div>
+				<div class="tour-control-right"></div>
+			</div>
+		</div>
+		<div id="settings-ovl" class="ns">
+			<div id="settings-title" class="openlight">
+				Settings
+			</div>
+			<div id="settings-wrap">
+				<div class="settings-item cf">
+					<div class="settings-item-left">
+						<div class="settings-item-title">Take the Tour</div>
+						<div class="settings-item-desc">Short introduction about the features</div>
+					</div>
+					<div class="settings-item-right">
+						<div id="settings-retaketour" class="settings-item-btn openbold">
+							View
+						</div>
+					</div>
+				</div>
+				<div class="settings-item cf">
+					<div class="settings-item-left">
+						<div class="settings-item-title">Clear Recent Activity</div>
+						<div class="settings-item-desc">(You will still be logged in)</div>
+					</div>
+					<div class="settings-item-right">
+						<div id="settings-clearrecent" class="settings-item-btn openbold">
+							Clear
+						</div>
+					</div>
+				</div>
+				<div class="settings-item cf">
+					<div class="settings-item-left">
+						<div class="settings-item-title">Clear Everything</div>
+						<div class="settings-item-desc">Removes <b>ALL</b> user information and logs you out.</div>
+					</div>
+					<div class="settings-item-right">
+						<div id="settings-clearall" class="settings-item-btn openbold">
+							Clear
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="settings-close">
+				Close Settings
+			</div>
+		</div>
+		<div id="update-wrap">
+
+		</div>
+		<div id="login-form-wrap">
+			<div class="parallax-layer para-0"></div>
+			<!--
+			<div class="parallax-layer para-1 ts" data-parallaxify-background-range="50" data-parallaxify-inverted="true"></div>
+			<div class="parallax-layer para-2 ts" data-parallaxify-background-range="25"></div> -->
+			<div id="login-form-ovl">
+				<div id="login-form">
+					<div id="login-form-logo" class="ns">
+
+					</div>
+					<div class="login-form-section">
+						<input type="text" placeholder="Username..." id="login-value-username" class="login-form-input ts" />
+					</div>
+					<div class="login-form-section">
+						<input type="password" placeholder="API Token..." id="login-value-api" class="login-form-input ts" />
+					</div>
+					<div id="login-form-submit" class="openbold">
+						Connect
+					</div>
+					<div class="login-form-about">
+						Your API token can be found under <a href="http://herro.co/dashboard" target="_blank">Settings</a><br />
+						Don't have an account? <a href="http://herro.co/register" target="_blank">Sign up</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

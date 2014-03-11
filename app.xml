@@ -1,0 +1,31 @@
+<application xmlns="http://ns.adobe.com/air/application/3.8">
+    <id>Herro</id>
+    <versionNumber>0.0.7</versionNumber>
+    <filename>Herro Updater</filename>
+	<description>Official light-weight scrobbler for Herro</description>
+	<copyright>Herro</copyright>
+    <supportedProfiles>extendedDesktop</supportedProfiles>
+    <initialWindow> 
+        <content>app.html</content>
+		<systemChrome>none</systemChrome>
+		<transparent>true</transparent>
+        <visible>true</visible>
+        <resizable>false</resizable>
+        <width>388</width> 
+        <height>628</height>
+    </initialWindow> 
+	<icon> 
+        <image128x128>
+            img/128x128.png
+        </image128x128>
+        <image48x48>
+            img/48x48.png
+        </image48x48>
+        <image32x32>
+            img/32x32.png
+        </image32x32>
+        <image16x16>
+            img/16x16.png
+        </image16x16>
+	</icon>
+</application>

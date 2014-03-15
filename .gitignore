@@ -1,3 +1,4 @@
 *.exe
 build.cmd
 generateCert.cmd
+certificate.p12

@@ -1,1 +1,0 @@
-adt -certificate -cn SelfSign -o "Herro" 2048-RSA certificate.p12 aMwlV0HKeX5e04IC5UyaR7R8eDmdDsczFcAiZLgTwzAo0YZznFl3MS9FFWBTSR#

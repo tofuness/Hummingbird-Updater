@@ -1,9 +1,9 @@
 <application xmlns="http://ns.adobe.com/air/application/3.8">
     <id>Herro</id>
     <versionNumber>0.0.7</versionNumber>
-    <filename>Herro Updater</filename>
-	<description>Official light-weight scrobbler for Herro</description>
-	<copyright>Herro</copyright>
+    <filename>Hummingbird Updater</filename>
+	<description>Official light-weight scrobbler for Hummingbird</description>
+	<copyright>Hummingbird</copyright>
     <supportedProfiles>extendedDesktop</supportedProfiles>
     <initialWindow> 
         <content>app.html</content>

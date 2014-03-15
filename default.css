@@ -143,7 +143,7 @@ a:hover {
 	width: 23px;
 	height: 50px;
 	border-right: 1px solid rgba(0,0,0,0.2);
-	background: url(img/herro-mini.png) center center no-repeat;
+	background: url(img/hb-mini.png) center center no-repeat;
 }
 #top-controls {
 	float: right;
@@ -282,7 +282,7 @@ a:hover {
 #login-form-logo {
 	width: 360px;
 	height: 250px;
-	background: url(img/login-logo.png) center center no-repeat;
+	background: url(img/login-logo-text.png) center center no-repeat;
 }
 .login-form-section {
 	padding-bottom: 15px;
@@ -330,7 +330,7 @@ a:hover {
 	border-bottom-left-radius: 4px;
 }
 .para-0 {
-	background: url(img/bgs/sombrero.png) center center;
+	background: url(img/bgs/tama.jpg) center center;
 }
 .para-1 {
 	background: url(img/para-1.png);

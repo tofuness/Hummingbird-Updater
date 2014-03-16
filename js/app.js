@@ -352,7 +352,7 @@ $(function(){
 		init: function(){
 			ui.initNote();
 			if(air.NativeApplication.supportsStartAtLogin && user.settings.startAtLogin){
-    			air.NativeApplication.nativeApplication.startAtLogin = true;
+    			//air.NativeApplication.nativeApplication.startAtLogin = true;
 			}
 			ui.centerWindow();
 			app.getUserSettings(function(){

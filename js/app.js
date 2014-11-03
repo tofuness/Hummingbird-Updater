@@ -306,7 +306,7 @@ $(function(){
 			setTimeout(function(){
 				$.ajax({
 					type: 'get',
-					url: 'https://raw.githubusercontent.com/Desuvader/Hummingbird-Updater/master/version',
+					url: 'https://cdn.rawgit.com/Desuvader/Hummingbird-Updater/master/version',
 					success: function(res){
 						air.trace('Retrieved version info');
 						if(helpers.versionCompare(res.version, appInfo.version) === 1){

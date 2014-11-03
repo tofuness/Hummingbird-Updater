@@ -8,3 +8,8 @@
 **About contributing**
 
 Code is super ugly. If you want to contribute, be sure to look through the code before trying anything.
+
+**Screenshots + video**
+**[Video of application in use](https://d1wst0behutosd.cloudfront.net/videos/236722.mp4)**
+![](http://u.cubeupload.com/Horo/NDzir0.png)
+![](http://u.cubeupload.com/Horo/76RNp4.png)

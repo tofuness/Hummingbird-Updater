@@ -306,7 +306,7 @@ $(function(){
 			setTimeout(function(){
 				$.ajax({
 					type: 'get',
-					url: 'http://api.herro.co/scrobble/ver',
+					url: 'https://raw.githubusercontent.com/Desuvader/Hummingbird-Updater/master/version',
 					success: function(res){
 						air.trace('Retrieved version info');
 						if(helpers.versionCompare(res.version, appInfo.version) === 1){
@@ -317,11 +317,10 @@ $(function(){
 								updateStream = new air.FileStream(),
 								//updateByteArray = new ByteArray(),
 								updateNP = new air.NativeProcess(),
-								updateNPSI = new air.NativeProcessStartupInfo(),
-								updateFileName = 'herro-' + res.version + '.exe'; // Default
+								updateNPSI = new air.NativeProcessStartupInfo();
 
 							updateLoader.dataFormat = air.URLLoaderDataFormat.BINARY;
-							updateLoader.load(new air.URLRequest('http://herro.co/client/' + updateFileName));
+							updateLoader.load(new air.URLRequest(res.url));
 							updateLoader.addEventListener(air.Event.COMPLETE, function(res){
 								// Windows run update
 								var updateFile = air.File.applicationStorageDirectory.resolvePath(updateFileName);

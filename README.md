@@ -5,4 +5,7 @@
 3. Clone this repository add run `adl app.xml` to start the application.
 4. There is no `console.log()` which sucks. Use `air.trace()` instead for logging.
 
+**Resources**
 
+Search
+http://hummingbird.me/api/v1/search/anime?query=<query>

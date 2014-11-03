@@ -18,9 +18,7 @@ $(function(){
 		}
 	},
 	appInfo = {
-		version: '0.0.7',
-		api: 'http://api.herro.co',
-		mashapeToken: 'PVFXO0p5viu6cHk4e6vg2cW6oF4ecF3w' // Play nice mofos
+		version: '0.0.7'
 	},
 	appState = {
 		noteOpen: 0,
@@ -95,8 +93,8 @@ $(function(){
 				noteObj.note.resizable = false;
 				noteObj.note.transparent = true;
 				noteObj.note.maximizable = false;
-				//noteObj.note.type = air.NativeWindowType.LIGHTWEIGHT;
-				noteObj.note.type = air.NativeWindowType.NORMAL;
+				noteObj.note.type = air.NativeWindowType.LIGHTWEIGHT;
+				//noteObj.note.type = air.NativeWindowType.NORMAL; // FOR DEV MODE
 				noteObj.note.systemChrome = air.NativeWindowSystemChrome.NONE;
 
 				noteObj.noteLoader = air.HTMLLoader.createRootWindow(true, noteObj.note, false, noteObj.noteBounds);
@@ -195,7 +193,7 @@ $(function(){
 				verb: null,
 				actor: {
 					displayName: user.settings.username,
-					url: 'http://herro.co/user/' + user.settings.loginName
+					url: 'http://hummingbird.me/users/' + user.settings.loginName + 'library'
 				},
 				target: {},
 				object: {}
@@ -250,7 +248,7 @@ $(function(){
 						var eventTemp = events[_id][i];
 
 						if(i == 0){
-							var activityItem = '<div class="cf activity ' + eventTemp.verb + '"><div class="activity-icon-wrap"><div class="activity-icon" style="background-image: url(http://images.weserv.nl/?w=40&q=95&url=' + eventTemp.object.image.replace('http://', '') + ')"><div class="activity-icon-ovl"></div></div></div><div class="activity-right"><div class="activity-timeago">' + moment(eventTemp.published).fromNow() + '</div><span class="activity-actor">' + eventTemp.actor.displayName + '</span> ' + eventTemp.verb + ' <a href="' + eventTemp.object.url + '" target="_blank" class="activity-object">' + eventTemp.object.displayName + '</a> to ' + eventTemp.target.displayName +  '.</div></div>';
+							var activityItem = '<div class="cf activity ' + eventTemp.verb + '"><div class="activity-icon-wrap"><div class="activity-icon" style="background-image: url(http://images.weserv.nl/?w=40&q=95&url=' + eventTemp.object.image.replace('https://', '') + ')"><div class="activity-icon-ovl"></div></div></div><div class="activity-right"><div class="activity-timeago">' + moment(eventTemp.published).fromNow() + '</div><span class="activity-actor">' + eventTemp.actor.displayName + '</span> ' + eventTemp.verb + ' <a href="' + eventTemp.object.url + '" target="_blank" class="activity-object">' + eventTemp.object.displayName + '</a> to ' + eventTemp.target.displayName +  '.</div></div>';
 
 							if(events[_id].length > 1){
 								activityItem = '<div class="activity-wrap" data-lastupdate="' + eventTemp.published + '">' + activityItem + '<ul class="sub-activity-list" data-id="' + eventTemp.object.id + '"></ul></div>';
@@ -389,15 +387,12 @@ $(function(){
 					ui.loading('Authenticating');
 
 					$.ajax({
-						beforeSend: function(xhr){
-							xhr.setRequestHeader('X-Mashape-Authorization', appInfo.mashapeToken);
-						},
 						data: {
 							username: inputUsername,
 							password: inputPassword
 						},
 						type: 'post',
-						url: 'https://hummingbirdv1.p.mashape.com/users/authenticate',
+						url: 'http://hummingbird.me/api/v1/users/authenticate',
 						success: function(res){
 							air.trace('Authenticated');
 
@@ -407,17 +402,6 @@ $(function(){
 							user.settings.password = inputPassword;
 							user.settings.apiToken = res;
 							app.saveUserSettings();
-
-							/*
-							activity.verb = 'connected';
-							activity.actor.displayName = user.settings.username;
-							activity.actor.url = 'http://herro.co/user/' + user.settings.loginName;
-							activity.object.id = 'misc';
-							activity.object.displayName = user.settings.username;
-							activity.object.url = 'http://herro.co/user/' + user.settings.loginName;
-							activity.target.displayName = 'the updater';
-							user.settings.activity.push(activity);
-							app.saveUserSettings(); */
 
 							setTimeout(function(){
 								$this.removeClass('disabled');
@@ -487,20 +471,19 @@ $(function(){
 			},
 			detectedEpisodes = null;
 
+			var animeTitle = anime.filename.replace(/\[.*?\]|(.mkv|.avi|.mp4)|\(.*\)/gi, '').replace(/_/g, ' ').replace(/^\s+|\s+$/g,'');
+			var detectedEpisodes = anime.filename.replace(/_/g, ' ').match(/[\._ \-]([0-9]{2,3})[v\._ \-\[\(].*[\[\(][0-9A-Za-z]{4,8}[\)\]][\/\._ \-\[\(]/);
+
 			$.ajax({
-				url: 'http://hummingbird.me/library_entries?user_id=dennis',
+				url: 'http://hummingbird.me/api/v1/search/anime?query=' + animeTitle,
 				success: function(response){
 					var animeDistanceScores = [];
-					var animeList = response.anime;
+					var animeList = response;
 
 					// Out stuff
 
-					var animeTitle = anime.filename.replace(/\[.*?\]|(.mkv|.avi|.mp4)|\(.*\)/gi, '').replace(/_/g, ' ').replace(/^\s+|\s+$/g,'');
-					var detectedEpisodes = anime.filename.replace(/_/g, ' ').match(/[\._ \-]([0-9]{2,3})[v\._ \-\[\(].*[\[\(][0-9A-Za-z]{4,8}[\)\]][\/\._ \-\[\(]/);
-
 					air.trace('animeTitle: "' + animeTitle + '"');
 					air.trace('detectedEpisodes: ' + detectedEpisodes);
-
 
 					if(detectedEpisodes){
 
@@ -514,37 +497,16 @@ $(function(){
 
 						for(var i = 0, l = animeList.length; i < l; i++){
 
-							if(animeList[i].canonical_title){
-								var distanceScore = animeTitle.distance(animeList[i].canonical_title);
-								if(distanceScore > 0.5){
+							if(animeList[i].title){
+								var distanceScore = animeTitle.distance(animeList[i].title);
+								if(distanceScore > 0.7){
 									animeDistanceScores.push({
 										anime: animeList[i],
 										score: distanceScore,
-										title: animeList[i].canonical_title
+										title: animeList[i].title
 									});
 								}
 							}
-							if(animeList[i].english_title){
-								var distanceScore = animeTitle.distance(animeList[i].english_title);
-								if(distanceScore > 0.5){
-									animeDistanceScores.push({
-										anime: animeList[i],
-										score: distanceScore,
-										title: animeList[i].english_title
-									});
-								}
-							}
-							if(animeList[i].romaji_title){
-								var distanceScore = animeTitle.distance(animeList[i].romaji_title);
-								if(distanceScore > 0.5){
-									animeDistanceScores.push({
-										anime: animeList[i],
-										score: distanceScore,
-										title: animeList[i].romaji_title
-									});
-								}
-							}
-
 						}
 
 						distanceResults = animeDistanceScores.sort(function SortByName(a, b){
@@ -553,42 +515,44 @@ $(function(){
 							return ((aScore > bScore) ? -1 : ((aScore < bScore) ? 1 : 0));
 						}).slice(0, 3);
 
-						anime._id = distanceResults[0].anime.id;
-						anime.title = distanceResults[0].title;
-						anime.slug = distanceResults[0].anime.id;
-						anime.image = distanceResults[0].anime.poster_image;
-						anime.score = distanceResults[0].score;
+						if(distanceResults.length){
+							anime._id = distanceResults[0].anime.id;
+							anime.title = distanceResults[0].title;
+							anime.slug = distanceResults[0].anime.id;
+							anime.image = distanceResults[0].anime.cover_image;
+							anime.score = distanceResults[0].score;
 
-						// Best results
+							// Best results
 
-						//air.trace(JSON.stringify(animeDistanceScores));
+							if(anime.progress){ // If we ended up with something
+								var animeObj = anime,
+									activity = helpers.activityObject();
+								ui.showNote(
+									'Do you want to update?',
+									'Detected <span class="openbold">' + animeObj.title +  ' Episode ' + animeObj.progress +  '</span>',
+									'scrobble',
+								function(){
+									air.trace(JSON.stringify(animeObj));
+									activity.verb = 'scrobbled';
+									activity.object.id = animeObj._id;
+									activity.object.title = animeObj.title;
+									activity.object.progress = animeObj.progress;
+									activity.object.displayName = animeObj.title + ' Episode ' + animeObj.progress;
+									activity.object.url = 'http://hummingbird.me/anime/' + animeObj.slug;
+									activity.object.image = animeObj.image;
+									activity.target.displayName = 'their list';
+									user.settings.activity.push(activity);
+									app.saveUserSettings();
 
-						if(anime.progress){ // If we ended up with something
-							var animeObj = anime,
-								activity = helpers.activityObject();
-							ui.showNote(
-								'Do you want to update?',
-								'Detected <span class="openbold">' + animeObj.title +  ' Episode ' + animeObj.progress +  '</span>',
-								'scrobble',
-							function(){
-
-								activity.verb = 'scrobbled';
-								activity.object.id = animeObj._id;
-								activity.object.title = animeObj.title;
-								activity.object.progress = animeObj.progress;
-								activity.object.displayName = animeObj.title + ' Episode ' + animeObj.progress;
-								activity.object.url = 'http://hummingbird.me/anime/' + animeObj.slug;
-								activity.object.image = animeObj.image;
-								activity.target.displayName = 'their list';
-								user.settings.activity.push(activity);
-								app.saveUserSettings();
-
-								// If the user confirmed the scrobble
-								air.trace('Scrobbling...');
-								//app.scrobbleAnime(animeObj);
-								animeObj = null;
-							});
-							//app.screenshot(anime.filename);
+									// If the user confirmed the scrobble
+									air.trace('Scrobbling...');
+									app.scrobbleAnime(animeObj);
+									animeObj = null;
+								});
+								//app.screenshot(anime.filename);
+							}
+						} else {
+							air.trace('Nothing matched distance search');
 						}
 					}
 
@@ -600,83 +564,23 @@ $(function(){
 					animeList = null;
 				}
 			});
-/*
-			$.ajax({
-				url: 'http://api.herro.co/listall/' + encodeURIComponent(anime.filename.replace(/\[.*?\]|(.mkv|.avi|.mp4)|\(.*\)/gi, '').replace(/_/g, ' ').replace(/^\s/, '')),
-				success: function(response){
-					anime._id = response[0]._id;
-					anime.slug = response[0].slug;
-					anime.title = response[0].title;
-					anime.image = response[0].image;
-					anime.score = response[0].score;
-
-					air.trace('We think it is: ' + anime.title);
-					air.trace('The encode: ' + anime.filename.replace(/\[.*?\]|(.mkv|.avi|.mp4)|\(.*\)/gi, '').replace(/_/g, ' ').replace(/^\s/, ''));
-
-					detectedEpisodes = anime.filename.replace(/_/g, ' ').match(/[\._ \-]([0-9]{2,3})[v\._ \-\[\(].*[\[\(][0-9A-Za-z]{4,8}[\)\]][\/\._ \-\[\(]/);
-					if(detectedEpisodes){
-						for(var i = 0; i < detectedEpisodes.length; i++){
-							if(helpers.isNumber(detectedEpisodes[i])){
-								// If it seems to be a valid number. Make it the "detected" episode.
-								air.trace('found something');
-								anime.progress = parseInt(parseFloat(detectedEpisodes[i]));
-							}
-						}
-						if(anime.progress){ // If we ended up with something
-							var animeObj = anime,
-								activity = helpers.activityObject();
-							ui.showNote(
-								'Do you want to update?',
-								'Detected <span class="openbold">' + anime.title +  ' Episode ' + anime.progress +  '</span>',
-								'scrobble',
-							function(){
-
-								activity.verb = 'scrobbled';
-								activity.object.id = animeObj._id;
-								activity.object.title = animeObj.title;
-								activity.object.progress = animeObj.progress;
-								activity.object.displayName = animeObj.title + ' Episode ' + animeObj.progress;
-								activity.object.url = 'http://herro.co/anime/' + animeObj.slug;
-								activity.object.image = animeObj.image;
-								activity.target.displayName = 'their list';
-								user.settings.activity.push(activity);
-								app.saveUserSettings();
-
-								// If the user confirmed the scrobble
-								air.trace('Scrobbling...');
-								app.scrobbleAnime(animeObj);
-								animeObj = null;
-							});
-							//app.screenshot(anime.filename);
-						}
-					}
-
-					// Nullify. Not sure if this thing really works
-					detectedEpisodes = null;
-					anime = null;
-					response = null;
-				}
-			});
-*/
 		},
 		scrobbleAnime: function(anime){
 			$.ajax({
-				beforeSend: function(xhr){
-					xhr.setRequestHeader('Authorization','Basic ' + user.settings.basicToken);
-				},
 				type: 'post',			
-				url: 'http://api.herro.co/list/scrobble',
+				url: 'http://hummingbird.me/api/v1/libraries/' + anime._id,
 				data: {
-					_id: anime._id,
-					progress: anime.progress
+					id: anime._id,
+					auth_token: user.settings.apiToken,
+					episodes_watched: anime.progress
 				},
-				success: function(){
+				success: function(res){
 					air.trace('Updated!');
 				},
 				error: function(){
-					confirm('Something went wrong when updating your list. Try updating directly through Herro instead!');
+					confirm('Something went wrong when updating your list. Try updating directly through Hummingbird instead!');
 				}
-			})
+			});
 		},
 		initTour: function(){
 			if(!user.settings.toured){
@@ -806,7 +710,7 @@ $(function(){
 			if(air.NativeApplication.supportsSystemTrayIcon){
 				iconLoad.contentLoaderInfo.addEventListener(air.Event.COMPLETE, iconLoadComplete); 
 				iconLoad.load(new air.URLRequest('img/16x16.png')); 
-				air.NativeApplication.nativeApplication.icon.tooltip = 'Herro Updater'; 
+				air.NativeApplication.nativeApplication.icon.tooltip = 'Hummingbird Updater'; 
 				air.NativeApplication.nativeApplication.icon.menu = iconMenu;
 
 				air.NativeApplication.nativeApplication.icon.addEventListener(air.MouseEvent.CLICK, function(){

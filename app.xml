@@ -1,9 +1,11 @@
-<application xmlns="http://ns.adobe.com/air/application/3.8">
+<?xml version="1.0" encoding="utf-8" ?>
+<application xmlns="http://ns.adobe.com/air/application/15.0">
     <id>Hummingbird</id>
     <versionNumber>0.0.7</versionNumber>
     <filename>Hummingbird Updater</filename>
+    <name>Hummingbird Updater</name>
 	<description>Official light-weight scrobbler for Hummingbird</description>
-	<copyright>Hummingbird</copyright>
+	<copyright>© Dennis Jin</copyright>
     <supportedProfiles>extendedDesktop</supportedProfiles>
     <initialWindow> 
         <content>app.html</content>

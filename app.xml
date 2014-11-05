@@ -4,7 +4,7 @@
     <versionNumber>0.0.7</versionNumber>
     <filename>Hummingbird Updater</filename>
     <name>Hummingbird Updater</name>
-	<description>Official light-weight scrobbler for Hummingbird</description>
+	<description>Light-weight scrobbler for Hummingbird</description>
 	<copyright>© Dennis Jin</copyright>
     <supportedProfiles>extendedDesktop</supportedProfiles>
     <initialWindow> 

@@ -193,7 +193,7 @@ $(function(){
 				verb: null,
 				actor: {
 					displayName: user.settings.username,
-					url: 'http://hummingbird.me/users/' + user.settings.loginName + 'library'
+					url: 'http://hummingbird.me/users/' + user.settings.loginName + '/library'
 				},
 				target: {},
 				object: {}

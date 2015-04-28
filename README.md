@@ -11,6 +11,6 @@ Code is super ugly. If you want to contribute, be sure to look through the code 
 
 ####Screenshots + video
 
-#####[Video of application in use](https://d1wst0behutosd.cloudfront.net/videos/236722.mp4)
+#####[Video of application in use](https://2.sendvid.com/vik5aftu.mp4)
 ![](http://u.cubeupload.com/Horo/NDzir0.png)
 ![](http://u.cubeupload.com/Horo/76RNp4.png)
